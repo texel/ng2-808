@@ -6,4 +6,7 @@ export class SequencerService {
     console.debug('sequencer service!');
   }
 
+  get isPlaying(): boolean {
+    return false;
+  }
 }

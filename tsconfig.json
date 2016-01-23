@@ -12,6 +12,7 @@
     "./src/app/app.spec.ts",
     "./src/app/app.ts",
     "./src/app/components/controls/controls.component.ts",
+    "./src/app/components/index.ts",
     "./src/app/components/sequence-selector/sequence-selector.component.ts",
     "./src/app/components/sequencer/sequencer.component.ts",
     "./src/app/directives/router-active.ts",
