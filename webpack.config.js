@@ -59,9 +59,20 @@ module.exports = {
       { test: /\.css$/,   loader: 'raw-loader' },
 
       // support for .html as raw text
-      { test: /\.html$/,  loader: 'raw-loader' }
+      { test: /\.html$/,  loader: 'raw-loader' },
+
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass']
+      },
 
       // if you add a loader include the resolve file extension above
+      // the url-loader uses DataUrls.
+      // the file-loader emits files.
+      { test: /(\.woff|\.woff2)$/,   loader: 'url-loader?limit=10000&minetype=application/font-woff' },
+      { test: /\.ttf$/,    loader: 'file-loader' },
+      { test: /\.eot$/,    loader: 'file-loader' },
+      { test: /\.svg$/,    loader: 'file-loader' }
     ]
   },
 
@@ -80,6 +91,10 @@ module.exports = {
       }
     })
   ],
+
+  ts: {
+    ignoreDiagnostics: [2300, 2403]
+  },
 
   // Other module loader config
   tslint: {

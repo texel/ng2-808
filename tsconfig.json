@@ -22,18 +22,22 @@
     "./src/app/home/providers/title.spec.ts",
     "./src/app/home/providers/title.ts",
     "./src/app/ng-808.component.ts",
+    "./src/app/services/sequencer.service.ts",
+    "./src/bootstrap-sass.config.ts",
     "./src/custom_typings.d.ts",
     "./src/main.ts",
     "./src/vendor.ts",
     "./test/injector.spec.ts",
     "./test/sanity-test.spec.ts",
-    "typings/main.d.ts"
+    "typings/main.d.ts",
+    "typings/jquery/jquery.d.ts"
   ],
   "filesGlob": [
     "./src/**/*.ts",
     "./test/**/*.ts",
     "!./node_modules/**/*.ts",
-    "typings/main.d.ts"
+    "typings/main.d.ts",
+    "typings/jquery/**"
   ],
   "compileOnSave": false,
   "buildOnSave": false,
