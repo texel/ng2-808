@@ -44,7 +44,7 @@
     "lodash": "^4.0.0",
     "rxjs": "5.0.0-beta.0",
     "sass": "^0.5.0",
-    "shabushabu": "git@bitbucket.org:splice/shabushabu.git#ng2-808-support",
+    "shabushabu": "git+ssh://git@bitbucket.org:splice/shabushabu.git#97faa57",
     "zone.js": "0.5.10"
   },
   "devDependencies": {

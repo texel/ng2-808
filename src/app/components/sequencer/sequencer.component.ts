@@ -20,12 +20,39 @@ export class Sequencer {
     return this.seq.tracks;
   }
 
-  cellClass(part: any, step: number) {
-    return '';
+  get currentStep(): number {
+    return 0;
   }
 
-  eventCellClass(part: any, event: any, index: number): string {
-    return '';
+  cellClass(part: any, step: number) {
+    // Hack
+    part.sequence = {currentStep: 0, numSteps: 8};
+    if ( this.currentStep === step ) {
+      return 'current';
+    } else if ( part.sequence.currentStep === step ) {
+      return 'ghost-current';
+    } else {
+      return '';
+    }
+  }
+
+  eventCellClass(part: any, event: Shabu.PatternEvent, index: number): string {
+    var descriptors = [];
+    // Hack
+    part.sequence = {currentStep: 0, numSteps: 8};
+
+    descriptors.push( this.cellClass(part, index) );
+    descriptors.push( {0: 'off', 0.5: 'on', 1: 'accent'}[event.level] );
+
+    if ( index >= part.sequence.numSteps ) {
+      descriptors.push( 'ghost' );
+    }
+
+    if ( (index % part.sequence.numSteps) === (part.sequence.numSteps - 1) ) {
+      descriptors.push( 'end' );
+    }
+
+    return descriptors.join(' ');
   }
 
   triggerPart(part: Shabu.PatternTrack, event: MouseEvent) {
@@ -34,6 +61,28 @@ export class Sequencer {
     var level   = offset / height;
 
     this.seq.playTrack(part, level);
+  }
+
+  toggleLevel(track: Shabu.PatternTrack, event: Shabu.PatternEvent, index: number) {
+    let add;
+    let $event = $(event);
+
+    if ( $event.shiftKey ) {
+      add = 1.0;
+    } else {
+      add = 0.5;
+    }
+
+    var level = ( event.level + add );
+
+    if ( level > 1 ) {
+      level = 0;
+    }
+
+    console.debug('event level is', event, event.level);
+
+    event.level = level;
+    // track.playEvent( event );
   }
 
   get stepsRange(): number {

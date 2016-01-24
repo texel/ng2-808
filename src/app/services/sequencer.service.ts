@@ -17,7 +17,7 @@ const DEFAULT_PARTS: {[key: string]: string} = {
   'Shaker': 'shaker'
 };
 
-export const DEFAULT_SEQUENCE = [0, 0, 0, 0, 0, 0, 0, 0]
+export const DEFAULT_SEQUENCE = [0, 0, 0, 0, 0, 0, 0, 0];
 
 export class SequencerService {
 

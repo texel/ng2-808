@@ -10,6 +10,6 @@
       <buffer-oscilloscope width="128" height="50" ></buffer-oscilloscope>
     </td>
     <td><select class="form-control" ng-model="part.sequence.numSteps" ng-options="value as value for value in [2, 4, 8, 16, 32]"></select></td>
-    <td *ngFor="#event of track.steps" class="event-cell {{ eventCellClass(part, event, $index) }}" ng-click="toggleLevel(part, event, $event)"><span></span></td>
+    <td *ngFor="#event of track.events" class="event-cell {{ eventCellClass(track, event, $index) }}" (click)="toggleLevel(track, event, i, $event)"><span></span></td>
   </tr>
 </table>
