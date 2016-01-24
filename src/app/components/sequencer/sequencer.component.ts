@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {SequencerService} from '../../services/sequencer.service';
+import {DEFAULT_SEQUENCE, SequencerService} from '../../services/sequencer.service';
 import * as Shabu from 'shabushabu';
 
 let $ = require('jquery');
@@ -10,6 +10,7 @@ let $ = require('jquery');
 })
 export class Sequencer {
   public drumMachine = {masterPart: {}};
+  public headerSteps = DEFAULT_SEQUENCE.map((_, i) => i + 1);
 
   constructor(
     private seq: SequencerService

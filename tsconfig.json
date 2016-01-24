@@ -31,14 +31,16 @@
     "./test/injector.spec.ts",
     "./test/sanity-test.spec.ts",
     "typings/main.d.ts",
-    "typings/jquery/jquery.d.ts"
+    "typings/jquery/jquery.d.ts",
+    "typings/lodash/lodash.d.ts"
   ],
   "filesGlob": [
     "./src/**/*.ts",
     "./test/**/*.ts",
     "!./node_modules/**/*.ts",
     "typings/main.d.ts",
-    "typings/jquery/**"
+    "typings/jquery/**",
+    "typings/lodash/**"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

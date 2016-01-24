@@ -2,7 +2,7 @@
   <tr>
     <th class="name-head">Name</th>
     <th class="steps-head">Steps</th>
-    <th ng-repeat="i in drumMachine.masterPart.sequence.stepsRange" class="{{ cellClass(drumMachine.masterPart, i) }} seek-cell" ng-click="drumMachine.seekToAndPlay($index)">{{ i + 1 }}</th>
+    <th *ngFor="#step of headerSteps" class="{{ cellClass(drumMachine.masterPart, i) }} seek-cell" ng-click="drumMachine.seekToAndPlay($index)">{{ step }}</th>
   </tr>
   <tr *ngFor="#track of tracks" ng-class="lastClass($last)">
     <td class="part-label" (click)="triggerPart(track, $event)">
@@ -10,6 +10,6 @@
       <buffer-oscilloscope width="128" height="50" ></buffer-oscilloscope>
     </td>
     <td><select class="form-control" ng-model="part.sequence.numSteps" ng-options="value as value for value in [2, 4, 8, 16, 32]"></select></td>
-    <td ng-repeat="event in part.sequence.fullSequence track by $index" class="event-cell {{ eventCellClass(part, event, $index) }}" ng-click="toggleLevel(part, event, $event)"><span></span></td>
+    <td *ngFor="#event of track.steps" class="event-cell {{ eventCellClass(part, event, $index) }}" ng-click="toggleLevel(part, event, $event)"><span></span></td>
   </tr>
 </table>

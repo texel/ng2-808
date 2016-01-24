@@ -1,5 +1,23 @@
 import {Injectable} from 'angular2/core';
 import * as Shabu from 'shabushabu/ts/index';
+import * as _ from 'lodash';
+
+const DEFAULT_PARTS: {[key: string]: string} = {
+  'Kick': 'kick_1',
+  'Snare': 'snare_1',
+  'LoConga': 'lo_conga',
+  'MidConga': 'med_conga',
+  'HiConga': 'hi_conga',
+  'Rim': 'rim',
+  'Clap': 'clap',
+  'CowBell': 'cowbell',
+  'Ride': 'ride',
+  'OpenHat': 'open_hat',
+  'ClosedHat': 'closed_hat',
+  'Shaker': 'shaker'
+};
+
+export const DEFAULT_SEQUENCE = [0, 0, 0, 0, 0, 0, 0, 0]
 
 export class SequencerService {
 
@@ -15,13 +33,15 @@ export class SequencerService {
     this.sequencer.debug = true;
     this.padSampler.debug = true;
 
-    let samplesLoaded = Promise.all([
-      this.engine.loadSample('kick', '/assets/samples/kick_1.wav')
-    ]);
+    let samplesLoaded = Promise.all(
+      _.map(DEFAULT_PARTS, (filename, name) => {
+        return this.engine.loadSample(name, `/assets/samples/${filename}.wav`);
+      })
+    );
 
     samplesLoaded.then(samples => {
       samples.forEach(s => {
-        this.sequencer.addSampleTrack(s, this.engine.samples[s], [0, 1, 0, 1]);
+        this.sequencer.addSampleTrack(s, this.engine.samples[s], DEFAULT_SEQUENCE);
       });
     });
   }
