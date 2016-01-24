@@ -1,5 +1,8 @@
 import {Component} from 'angular2/core';
 import {SequencerService} from '../../services/sequencer.service';
+import * as Shabu from 'shabushabu';
+
+let $ = require('jquery');
 
 @Component({
   selector: 'sequencer',
@@ -12,7 +15,7 @@ export class Sequencer {
     private seq: SequencerService
   ) { }
 
-  get tracks() {
+  get tracks(): Shabu.PatternTrack[] {
     return this.seq.tracks;
   }
 
@@ -22,6 +25,14 @@ export class Sequencer {
 
   eventCellClass(part: any, event: any, index: number): string {
     return '';
+  }
+
+  triggerPart(part: Shabu.PatternTrack, event: MouseEvent) {
+    var height  = $(event.currentTarget).outerHeight();
+    var offset  = height - event.offsetY;
+    var level   = offset / height;
+
+    this.seq.playTrack(part, level);
   }
 
   get stepsRange(): number {

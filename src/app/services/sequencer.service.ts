@@ -26,6 +26,10 @@ export class SequencerService {
     });
   }
 
+  playTrack(track: Shabu.PatternTrack, volume = 1) {
+    this.engine.playBuffer(track.sample, volume, 1, 0);
+  }
+
   get tracks(): Shabu.PatternTrack[] {
     return this.sequencer.patternTracks;
   }

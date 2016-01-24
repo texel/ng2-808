@@ -5,7 +5,7 @@
     <th ng-repeat="i in drumMachine.masterPart.sequence.stepsRange" class="{{ cellClass(drumMachine.masterPart, i) }} seek-cell" ng-click="drumMachine.seekToAndPlay($index)">{{ i + 1 }}</th>
   </tr>
   <tr *ngFor="#track of tracks" ng-class="lastClass($last)">
-    <td class="part-label" ng-click="triggerPart(part, $event)">
+    <td class="part-label" (click)="triggerPart(track, $event)">
       {{ track.name }}
       <buffer-oscilloscope width="128" height="50" ></buffer-oscilloscope>
     </td>
