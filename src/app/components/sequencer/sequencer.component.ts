@@ -55,12 +55,15 @@ export class Sequencer {
     return descriptors.join(' ');
   }
 
-  triggerPart(part: Shabu.PatternTrack, event: MouseEvent) {
+  triggerPart(track: Shabu.PatternTrack, level: number) {
+    this.seq.playTrack(track, level);
+  }
+
+  levelFromMouseEvent(event: MouseEvent): number {
     var height  = $(event.currentTarget).outerHeight();
     var offset  = height - event.offsetY;
-    var level   = offset / height;
 
-    this.seq.playTrack(part, level);
+    return offset / height;
   }
 
   toggleLevel(track: Shabu.PatternTrack, event: Shabu.PatternEvent, index: number) {
@@ -82,7 +85,7 @@ export class Sequencer {
     console.debug('event level is', event, event.level);
 
     event.level = level;
-    // track.playEvent( event );
+    this.triggerPart(track, level);
   }
 
   get stepsRange(): number {
