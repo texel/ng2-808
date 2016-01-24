@@ -1,4 +1,5 @@
 import {Component} from 'angular2/core';
+import {SequencerService} from '../../services/sequencer.service';
 
 @Component({
   selector: 'sequencer',
@@ -6,9 +7,14 @@ import {Component} from 'angular2/core';
 })
 export class Sequencer {
   public drumMachine = {masterPart: {}};
-  public tracks = [{
-    name: 'one'
-  }];
+
+  constructor(
+    private seq: SequencerService
+  ) { }
+
+  get tracks() {
+    return this.seq.tracks;
+  }
 
   cellClass(part: any, step: number) {
     return '';

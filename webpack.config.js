@@ -49,7 +49,11 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        exclude: [ /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/ ]
+        // exclude: [ /\.(spec|e2e)\.ts$/, /node_modules\/(?!(ng2-.+))/ ],
+        include: [
+          path.resolve(__dirname, 'src'),
+          path.resolve(__dirname, 'node_modules/shabushabu'),
+        ]
       },
 
       // Support for *.json files.
@@ -93,7 +97,7 @@ module.exports = {
   ],
 
   ts: {
-    ignoreDiagnostics: [2300, 2403]
+    ignoreDiagnostics: [2300, 2403, 2322]
   },
 
   // Other module loader config

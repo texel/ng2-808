@@ -43,7 +43,7 @@
     "jquery": "^2.2.0",
     "rxjs": "5.0.0-beta.0",
     "sass": "^0.5.0",
-    "shabushabu": "git@bitbucket.org:splice/shabushabu.git#74c2e15",
+    "shabushabu": "git@bitbucket.org:splice/shabushabu.git#ng2-808-support",
     "zone.js": "0.5.10"
   },
   "devDependencies": {
