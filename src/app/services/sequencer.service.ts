@@ -1,6 +1,7 @@
-import {Injectable} from 'angular2/core';
 import * as Shabu from 'shabushabu/ts/index';
 import * as _ from 'lodash';
+
+import {EventPatternTrack, EventProxy} from '../models/event-pattern-track.model';
 
 const DEFAULT_PARTS: {[key: string]: string} = {
   'Kick': 'kick_1',
@@ -29,6 +30,7 @@ export class SequencerService {
   private engine = Shabu.NewEngine();
   private sequencer = new Shabu.Sequencer(this.engine, 120);
   private padSampler = new Shabu.PadSampler(this.engine, 12);
+  private eventPatternTracks: EventPatternTrack[];
 
   constructor() {
     console.debug('sequencer service!');
@@ -49,9 +51,10 @@ export class SequencerService {
     samplesLoaded.then(samples => {
       samples.forEach((s, index) => {
         this.padSampler.loadPad(index, this.engine.samples[s]);
-        this.sequencer.addTrack(s, DEFAULT_SEQUENCE);
+        this.sequencer.addTrack(s, DEFAULT_SEQUENCE, true);
       });
 
+      this.eventPatternTracks = this.sequencer.patternTracks.map(t => new EventPatternTrack(t));
       this.sequencer.connect(this.padSampler);
     });
   }
@@ -64,16 +67,16 @@ export class SequencerService {
     this.sequencer.stop();
   }
 
-  playTrack(track: Shabu.PatternTrack, volume = 1) {
-    this.engine.playBuffer(track.sample, volume, 1, 0);
-  }
-
   playSample(index: number, volume = 1) {
     this.padSampler.playPad(index, 0, volume);
   }
 
   get tracks(): Shabu.PatternTrack[] {
     return this.sequencer.patternTracks;
+  }
+
+  get eventTracks(): EventPatternTrack[] {
+    return this.eventPatternTracks;
   }
 
   get isPlaying(): boolean {

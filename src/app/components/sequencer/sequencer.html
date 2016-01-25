@@ -4,7 +4,7 @@
     <th class="steps-head">Steps</th>
     <th *ngFor="#step of headerSteps" class="{{ cellClass(drumMachine.masterPart, i) }} seek-cell" (click)="drumMachine.seekToAndPlay($index)">{{ step }}</th>
   </tr>
-  <tr *ngFor="#track of tracks; #i = index" ng-class="lastClass($last)">
+  <tr *ngFor="#track of eventTracks; #i = index" ng-class="lastClass($last)">
     <td class="part-label" (click)="triggerPart(i, levelFromMouseEvent($event))">
       {{ track.name }}
       <buffer-oscilloscope width="128" height="50" ></buffer-oscilloscope>
@@ -14,6 +14,6 @@
         <option *ngFor="#steps of [2, 4, 8, 16, 32]" [value]="steps">{{ steps }}</option>
       </select>
     </td>
-    <td *ngFor="#event of track.events" class="event-cell {{ eventCellClass(track, event, $index) }}" (click)="toggleLevel(track, event, i, $event)"><span></span></td>
+    <td *ngFor="#event of track.events" class="event-cell {{ eventCellClass(track, event, $index) }}" (click)="toggleLevel(i, event, $event)"><span></span></td>
   </tr>
 </table>

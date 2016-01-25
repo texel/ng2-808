@@ -28,7 +28,7 @@ export class Controls {
     return 1;
   }
 
-  get maxTemp(): number {
+  get maxTempo(): number {
     return 200;
   }
 

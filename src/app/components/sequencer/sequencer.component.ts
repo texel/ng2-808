@@ -2,6 +2,8 @@ import {Component} from 'angular2/core';
 import {DEFAULT_SEQUENCE, SequencerService} from '../../services/sequencer.service';
 import * as Shabu from 'shabushabu';
 
+import {EventPatternTrack} from '../../models/event-pattern-track.model';
+
 let $ = require('jquery');
 
 @Component({
@@ -66,7 +68,11 @@ export class Sequencer {
     return offset / height;
   }
 
-  toggleLevel(track: Shabu.PatternTrack, event: Shabu.PatternEvent, index: number) {
+  get eventTracks(): EventPatternTrack[] {
+    return this.seq.eventTracks;
+  }
+
+  toggleLevel(index: number, event: Shabu.PatternEvent) {
     let add;
     let $event = $(event);
 
@@ -84,10 +90,6 @@ export class Sequencer {
 
     event.level = level;
 
-    this.triggerPart(track, level);
-  }
-
-  get stepsRange(): number {
-    return 1;
+    this.triggerPart(index, level);
   }
 }
