@@ -17,7 +17,12 @@ const DEFAULT_PARTS: {[key: string]: string} = {
   'Shaker': 'shaker'
 };
 
-export const DEFAULT_SEQUENCE = [0, 0, 0, 0, 0, 0, 0, 0];
+export const DEFAULT_SEQUENCE = [
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0
+];
 
 export class SequencerService {
 
@@ -32,6 +37,8 @@ export class SequencerService {
     this.engine.debug = true;
     this.sequencer.debug = true;
     this.padSampler.debug = true;
+
+    this.sequencer.patternLength = DEFAULT_SEQUENCE.length;
 
     let samplesLoaded = Promise.all(
       _.map(DEFAULT_PARTS, (filename, name) => {
