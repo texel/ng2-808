@@ -1,7 +1,9 @@
 <div class="col-lg-4 sequence-select">
   <form class="form-inline">
-    <label ng-click="activateDump()">Pattern</label>
-    <select class="form-control" ng-model="drumMachine.currentSequence" ng-change="drumMachine.updateSequence()" ng-options="sequence as name for (name, sequence) in drumMachine.sequences"></select>
-    <button class="btn" ng-show="showDump" ng-click="dumpSequence()">Dump</button>
+    <label (click)="showDump = !showDump">Pattern</label>
+    <select class="form-control" [(ngModel)]="currentSequence">
+      <option *ngFor="#patternName of patternNames" [value]="patternName">{{patternName}}</option>
+    </select>
+    <button class="btn" *ngIf="showDump" (click)="dumpSequence()">Dump</button>
   </form>
 </div>

@@ -20,7 +20,7 @@
       <input class="form-control" name="swingInput" type="number" min="0" max="85" [(ngModel)]="sequencer.swing" ng-model-options="{ updateOn: 'blur' }" integer />
       <label>% Swing</label>
 
-      <span ng-show="!drumMachine.clock.validTempo()">Please enter a tempo between 10 and 240.</span>
+      <span *ngIf="!validTempo">Please enter a tempo between 10 and 240.</span>
     </fieldset>
   </form>
 </div>

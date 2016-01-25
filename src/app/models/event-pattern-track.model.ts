@@ -22,6 +22,12 @@ export class EventPatternTrack {
     this.updateEvents();
   }
 
+  set steps(s: number[]) {
+    this.patternTrack.steps = s;
+
+    this.updateEvents();
+  }
+
   updateEvents() {
     this.events = this.patternTrack.steps.map((s, index) => {
       return new EventProxy(this.patternTrack.eventAtPosition(index));

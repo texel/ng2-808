@@ -25,6 +25,7 @@
     "./src/app/ng-808.component.ts",
     "./src/app/services/sequencer.service.ts",
     "./src/app/models/event-pattern-track.model.ts",
+    "./src/app/lib/default-patterns.ts",
     "./src/bootstrap-sass.config.ts",
     "./src/custom_typings.d.ts",
     "./src/main.ts",

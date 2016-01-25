@@ -2,6 +2,7 @@ import * as Shabu from 'shabushabu/ts/index';
 import * as _ from 'lodash';
 
 import {EventPatternTrack, EventProxy} from '../models/event-pattern-track.model';
+import {DEFAULT_PATTERNS} from '../lib/default-patterns.ts';
 
 const DEFAULT_PARTS: {[key: string]: string} = {
   'Kick': 'kick_1',
@@ -27,10 +28,14 @@ export const DEFAULT_SEQUENCE = [
 
 export class SequencerService {
 
+  public samplesLoaded: Promise<any[]>;
+
   private engine = Shabu.NewEngine();
   private sequencer = new Shabu.Sequencer(this.engine, 120);
   private padSampler = new Shabu.PadSampler(this.engine, 12);
   private eventPatternTracks: EventPatternTrack[];
+
+  public DEFAULT_PATTERNS = DEFAULT_PATTERNS;
 
   constructor() {
     console.debug('sequencer service!');
@@ -42,13 +47,13 @@ export class SequencerService {
 
     this.sequencer.patternLength = DEFAULT_SEQUENCE.length;
 
-    let samplesLoaded = Promise.all(
+    this.samplesLoaded = Promise.all(
       _.map(DEFAULT_PARTS, (filename, name) => {
         return this.engine.loadSample(name, `/assets/samples/${filename}.wav`);
       })
     );
 
-    samplesLoaded.then(samples => {
+    this.samplesLoaded.then(samples => {
       samples.forEach((s, index) => {
         this.padSampler.loadPad(index, this.engine.samples[s]);
         this.sequencer.addTrack(s, DEFAULT_SEQUENCE, true);
@@ -99,5 +104,31 @@ export class SequencerService {
   }
   set swing(s: number) {
     this.sequencer.swingFactor = s * 0.01;
+  }
+
+  clearAllSequences() {
+    // TODO: Implement me
+  }
+
+  loadSequence(sequence: any) {
+    this.tempo = sequence.tempo;
+    this.swing = sequence.swingPercent;
+
+    this.clearAllSequences();
+
+    _.each(sequence.pattern, (levels, name) => {
+      let track: EventPatternTrack = this.eventTracks.find(t => t.name === name);
+
+      let paddedLevels: number[] = [];
+
+      _.range(32).forEach(i => {
+        paddedLevels[i] = levels[i] || 0;
+      });
+
+      if (track) {
+        track.steps = paddedLevels;
+        track.length = levels.length;
+      }
+    });
   }
 }

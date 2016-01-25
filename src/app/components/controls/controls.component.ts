@@ -32,6 +32,11 @@ export class Controls {
     return 200;
   }
 
+  get validTempo(): boolean {
+    return this.sequencer.tempo > 20 &&
+        this.sequencer.tempo <= 240;
+  }
+
   get playButtonClass(): string {
     if ( this.sequencer.isPlaying ) {
       return 'pause';
