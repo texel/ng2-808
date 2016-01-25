@@ -77,7 +77,7 @@ export class SequencerService {
   }
 
   get isPlaying(): boolean {
-    return false;
+    return this.sequencer.playing;
   }
 
   get tempo(): number {
