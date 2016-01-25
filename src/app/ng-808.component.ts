@@ -1,5 +1,5 @@
 import {Component} from 'angular2/core';
-import {COMMON_DIRECTIVES, FORM_PROVIDERS} from 'angular2/common';
+import {COMMON_DIRECTIVES, FORM_PROVIDERS, FORM_DIRECTIVES} from 'angular2/common';
 
 import {SequencerService} from './services/sequencer.service';
 
@@ -10,9 +10,10 @@ let styles = require('./ng-808.scss');
 @Component({
   selector: 'ng-808',
   template: require('./ng-808.html'),
-  providers: [SequencerService],
+  providers: [FORM_PROVIDERS, SequencerService],
   directives: [
     COMMON_DIRECTIVES,
+    FORM_DIRECTIVES,
     Controls,
     SequenceSelector,
     Sequencer

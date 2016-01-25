@@ -1,23 +1,23 @@
 <div class="col-lg-6 controls">
   <form name="controls" class="form-inline">
     <fieldset>
-      <button class="btn" ng-click="advanceAndPlay(-1)">
+      <button class="btn" (click)="advanceAndPlay(-1)">
         <span class="glyphicon glyphicon-backward"></span>
       </button>
-      <button class="btn btn-primary" ng-click="play()">
+      <button class="btn btn-primary" (click)="play()">
         <span class="glyphicon glyphicon-{{ playButtonClass }}"></span>
       </button>
-      <button class="btn" ng-click="stop()">
+      <button class="btn" (click)="stop()">
         <span class="glyphicon glyphicon-stop"></span>
       </button>
-      <button class="btn" ng-click="advanceAndPlay()">
+      <button class="btn" (click)="advanceAndPlay()">
         <span class="glyphicon glyphicon-forward"></span>
       </button>
 
-      <input class="form-control" name="tempoInput" type="number" min="{{ minTempo }}" max="{{ maxTempo }}" ng-model="drumMachine.clock.tempo" ng-model-options="{ updateOn: 'blur' }" integer />
+      <input class="form-control" name="tempoInput" type="number" min="{{ minTempo }}" max="{{ maxTempo }}" [(ngModel)]="sequencer.tempo" ng-model-options="{ updateOn: 'blur' }" integer />
       <label>BPM</label>
 
-      <input class="form-control" name="swingInput" type="number" min="0" max="85" ng-model="drumMachine.clock.swingPercent" ng-model-options="{ updateOn: 'blur' }" integer />
+      <input class="form-control" name="swingInput" type="number" min="0" max="85" [(ngModel)]="sequencer.swing" ng-model-options="{ updateOn: 'blur' }" integer />
       <label>% Swing</label>
 
       <span ng-show="!drumMachine.clock.validTempo()">Please enter a tempo between 10 and 240.</span>

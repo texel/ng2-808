@@ -55,8 +55,8 @@ export class Sequencer {
     return descriptors.join(' ');
   }
 
-  triggerPart(track: Shabu.PatternTrack, level: number) {
-    this.seq.playTrack(track, level);
+  triggerPart(index: number, level: number) {
+    this.seq.playSample(index, level);
   }
 
   levelFromMouseEvent(event: MouseEvent): number {
@@ -82,9 +82,8 @@ export class Sequencer {
       level = 0;
     }
 
-    console.debug('event level is', event, event.level);
-
     event.level = level;
+
     this.triggerPart(track, level);
   }
 

@@ -40,14 +40,29 @@ export class SequencerService {
     );
 
     samplesLoaded.then(samples => {
-      samples.forEach(s => {
-        this.sequencer.addSampleTrack(s, this.engine.samples[s], DEFAULT_SEQUENCE);
+      samples.forEach((s, index) => {
+        this.padSampler.loadPad(index, this.engine.samples[s]);
+        this.sequencer.addTrack(s, DEFAULT_SEQUENCE);
       });
+
+      this.sequencer.connect(this.padSampler);
     });
+  }
+
+  play() {
+    this.sequencer.start();
+  }
+
+  stop() {
+    this.sequencer.stop();
   }
 
   playTrack(track: Shabu.PatternTrack, volume = 1) {
     this.engine.playBuffer(track.sample, volume, 1, 0);
+  }
+
+  playSample(index: number, volume = 1) {
+    this.padSampler.playPad(index, 0, volume);
   }
 
   get tracks(): Shabu.PatternTrack[] {
@@ -56,5 +71,19 @@ export class SequencerService {
 
   get isPlaying(): boolean {
     return false;
+  }
+
+  get tempo(): number {
+    return this.sequencer.bpm;
+  }
+  set tempo(t: number) {
+    this.sequencer.bpm = t;
+  }
+
+  get swing(): number {
+    return this.sequencer.swingFactor * 100;
+  }
+  set swing(s: number) {
+    this.sequencer.swingFactor = s * 0.01;
   }
 }

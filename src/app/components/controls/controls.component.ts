@@ -13,11 +13,11 @@ export class Controls {
   ) { }
 
   play() {
-
+    this.sequencer.play();
   }
 
   stop() {
-
+    this.sequencer.stop();
   }
 
   advanceAndPlay(steps = 1) {
