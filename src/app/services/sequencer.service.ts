@@ -107,7 +107,10 @@ export class SequencerService {
   }
 
   clearAllSequences() {
-    // TODO: Implement me
+    this.eventTracks.forEach(t => {
+      t.steps = DEFAULT_SEQUENCE;
+      t.length = DEFAULT_SEQUENCE.length;
+    });
   }
 
   loadSequence(sequence: any) {
