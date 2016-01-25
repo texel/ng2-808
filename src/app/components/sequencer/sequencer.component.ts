@@ -14,6 +14,9 @@ export class Sequencer {
   public drumMachine = {masterPart: {}};
   public headerSteps = DEFAULT_SEQUENCE.map((_, i) => i + 1);
 
+  private _currentPos = 0;
+  private _scheduled = false;
+
   constructor(
     private seq: SequencerService
   ) { }
@@ -23,16 +26,23 @@ export class Sequencer {
   }
 
   get currentStep(): number {
-    return 0;
+    if ( this._currentPos != this.seq.currentPosition && !this._scheduled ) {
+      setTimeout(() => {
+        this._currentPos = this.seq.currentPosition;
+        this._scheduled = false;
+
+      }, 10);
+
+      this._scheduled = true;
+    }
+
+    return this._currentPos;
   }
 
-  cellClass(track: any, step: number) {
-    // Hack
-    track.sequence = {currentStep: 0, numSteps: 8};
-
+  cellClass(track: EventPatternTrack, step: number) {
     if ( this.currentStep === step ) {
       return 'current';
-    } else if ( track.sequence.currentStep === step ) {
+    } else if ( track.isCurrentPos(this.currentStep, step) ) {
       return 'ghost-current';
     } else {
       return '';

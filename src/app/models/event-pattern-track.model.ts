@@ -27,6 +27,10 @@ export class EventPatternTrack {
       return new EventProxy(this.patternTrack.eventAtPosition(index));
     });
   }
+
+  isCurrentPos(current: number, pos: number): boolean {
+    return current % this.patternTrack.length === pos;
+  }
 }
 
 export class EventProxy {

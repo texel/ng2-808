@@ -36,9 +36,9 @@ export class SequencerService {
     console.debug('sequencer service!');
 
     // Debug all the things!
-    this.engine.debug = true;
-    this.sequencer.debug = true;
-    this.padSampler.debug = true;
+    // this.engine.debug = true;
+    // this.sequencer.debug = true;
+    // this.padSampler.debug = true;
 
     this.sequencer.patternLength = DEFAULT_SEQUENCE.length;
 
@@ -81,6 +81,10 @@ export class SequencerService {
 
   get isPlaying(): boolean {
     return this.sequencer.playing;
+  }
+
+  get currentPosition(): number {
+    return this.sequencer.patternPos;
   }
 
   get tempo(): number {

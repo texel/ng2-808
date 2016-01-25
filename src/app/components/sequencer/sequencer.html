@@ -2,7 +2,7 @@
   <tr>
     <th class="name-head">Name</th>
     <th class="steps-head">Steps</th>
-    <th *ngFor="#step of headerSteps" class="{{ cellClass(drumMachine.masterPart, i) }} seek-cell" (click)="drumMachine.seekToAndPlay($index)">{{ step }}</th>
+    <th *ngFor="#step of headerSteps" class="seek-cell" (click)="drumMachine.seekToAndPlay($index)">{{ step }}</th>
   </tr>
   <tr *ngFor="#track of eventTracks; #i = index" ng-class="lastClass($last)">
     <td class="part-label" (click)="triggerPart(i, levelFromMouseEvent($event))">
