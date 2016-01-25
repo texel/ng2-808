@@ -26,31 +26,30 @@ export class Sequencer {
     return 0;
   }
 
-  cellClass(part: any, step: number) {
+  cellClass(track: any, step: number) {
     // Hack
-    part.sequence = {currentStep: 0, numSteps: 8};
+    track.sequence = {currentStep: 0, numSteps: 8};
+
     if ( this.currentStep === step ) {
       return 'current';
-    } else if ( part.sequence.currentStep === step ) {
+    } else if ( track.sequence.currentStep === step ) {
       return 'ghost-current';
     } else {
       return '';
     }
   }
 
-  eventCellClass(part: any, event: Shabu.PatternEvent, index: number): string {
+  eventCellClass(track: EventPatternTrack, event: Shabu.PatternEvent, index: number): string {
     var descriptors = [];
-    // Hack
-    part.sequence = {currentStep: 0, numSteps: 8};
 
-    descriptors.push( this.cellClass(part, index) );
+    descriptors.push( this.cellClass(track, index) );
     descriptors.push( {0: 'off', 0.5: 'on', 1: 'accent'}[event.level] );
 
-    if ( index >= part.sequence.numSteps ) {
+    if ( index >= track.length ) {
       descriptors.push( 'ghost' );
     }
 
-    if ( (index % part.sequence.numSteps) === (part.sequence.numSteps - 1) ) {
+    if ( (index % track.length) === (track.length - 1) ) {
       descriptors.push( 'end' );
     }
 

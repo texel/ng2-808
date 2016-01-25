@@ -14,6 +14,6 @@
         <option *ngFor="#steps of [2, 4, 8, 16, 32]" [value]="steps">{{ steps }}</option>
       </select>
     </td>
-    <td *ngFor="#event of track.events" class="event-cell {{ eventCellClass(track, event, $index) }}" (click)="toggleLevel(i, event, $event)"><span></span></td>
+    <td *ngFor="#event of track.events; #eventIndex = index" class="event-cell {{ eventCellClass(track, event, eventIndex) }}" (click)="toggleLevel(i, event, $event)"><span></span></td>
   </tr>
 </table>
